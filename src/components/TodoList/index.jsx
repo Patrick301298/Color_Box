@@ -28,7 +28,6 @@ function TodoList(props) {
             </li>
           );
         })}
-        ;
       </ul>
     </div>
   );
