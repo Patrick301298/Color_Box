@@ -3,15 +3,16 @@ import "./App.scss";
 import queryString from "query-string";
 import Pagination from "./components/Pagination";
 import PostList from "./components/PostList";
-import TodoForm from "./components/TodoForm";
-import TodoList from "./components/TodoList";
+import PostFiltersForm from "./components/PostFiltersForm";
+// import TodoForm from "./components/TodoForm";
+// import TodoList from "./components/TodoList";
 
 function App() {
-  const [todoList, setTodoList] = useState([
-    { id: 1, title: "I love Easy FrontEnd!" },
-    { id: 2, title: "We love Easy FrontEnd!" },
-    { id: 3, title: "They love Easy FrontEnd!" },
-  ]);
+  // const [todoList, setTodoList] = useState([
+  //   { id: 1, title: "I love Easy FrontEnd!" },
+  //   { id: 2, title: "We love Easy FrontEnd!" },
+  //   { id: 3, title: "They love Easy FrontEnd!" },
+  // ]);
 
   const [postList, setPostList] = useState([]);
   const [pagination, setPagination] = useState({
@@ -22,6 +23,7 @@ function App() {
   const [filters, setFilters] = useState({
     _limit: 10,
     _page: 1,
+    title_like: "",
   });
 
   useEffect(() => {
@@ -54,31 +56,41 @@ function App() {
     });
   }
 
-  function handleTodoClick(todo) {
-    console.log(todo);
-    const index = todoList.findIndex((x) => x.id === todo.id);
-    if (index < 0) {
-      return;
-    }
-    const newTodoList = [...todoList];
-    newTodoList.splice(index, 1);
-    setTodoList(newTodoList);
-  }
-  function handleTodoFormSubmit(formValues) {
-    console.log("Form Submit ", formValues);
-    const newTodo = {
-      id: todoList.length + 1,
-      ...formValues,
-    };
-    const newTodoList = [...todoList];
-    newTodoList.push(newTodo);
-    setTodoList(newTodoList);
+  // function handleTodoClick(todo) {
+  //   console.log(todo);
+  //   const index = todoList.findIndex((x) => x.id === todo.id);
+  //   if (index < 0) {
+  //     return;
+  //   }
+  //   const newTodoList = [...todoList];
+  //   newTodoList.splice(index, 1);
+  //   setTodoList(newTodoList);
+  // }
+  // function handleTodoFormSubmit(formValues) {
+  //   console.log("Form Submit ", formValues);
+  //   const newTodo = {
+  //     id: todoList.length + 1,
+  //     ...formValues,
+  //   };
+  //   const newTodoList = [...todoList];
+  //   newTodoList.push(newTodo);
+  //   setTodoList(newTodoList);
+  // }
+
+  function handleFiltersChange(newFilters) {
+    console.log("New Filter", newFilters);
+    setFilters({
+      ...filters,
+      _page: 1,
+      title_like: newFilters.searchTerm,
+    });
   }
   return (
     <div className="app">
       <h1> Welcome -TodoList</h1>
-      <TodoForm onSubmit={handleTodoFormSubmit} />
-      <TodoList todos={todoList} onTodoClick={handleTodoClick} />
+      <PostFiltersForm onSubmit={handleFiltersChange} />
+      {/* <TodoForm onSubmit={handleTodoFormSubmit} />
+      <TodoList todos={todoList} onTodoClick={handleTodoClick} /> */}
       <PostList posts={postList} />
       <Pagination pagination={pagination} onPageChange={handlePageChange} />
     </div>
