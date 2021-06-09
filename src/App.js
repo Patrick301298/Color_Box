@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+// import { useEffect } from "react";
 import "./App.scss";
+import BetterClock from "./components/BetterClock";
 // import queryString from "query-string";
 import Clock from "./components/Clock";
 // import Pagination from "./components/Pagination";
@@ -91,6 +93,7 @@ function App() {
     <div className="app">
       <h1> Welcome - Clock</h1>
       {showClock && <Clock />}
+      <BetterClock />
       <button
         onClick={() => {
           setShowClock(false);
