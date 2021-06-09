@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./App.scss";
-import queryString from "query-string";
-import Pagination from "./components/Pagination";
-import PostList from "./components/PostList";
-import PostFiltersForm from "./components/PostFiltersForm";
+// import queryString from "query-string";
+import Clock from "./components/Clock";
+// import Pagination from "./components/Pagination";
+// import PostList from "./components/PostList";
+// import PostFiltersForm from "./components/PostFiltersForm";
 // import TodoForm from "./components/TodoForm";
 // import TodoList from "./components/TodoList";
 
@@ -14,47 +15,48 @@ function App() {
   //   { id: 3, title: "They love Easy FrontEnd!" },
   // ]);
 
-  const [postList, setPostList] = useState([]);
-  const [pagination, setPagination] = useState({
-    _page: 1,
-    _limit: 10,
-    _totalRows: 1,
-  });
-  const [filters, setFilters] = useState({
-    _limit: 10,
-    _page: 1,
-    title_like: "",
-  });
+  // const [postList, setPostList] = useState([]);
+  // const [pagination, setPagination] = useState({
+  //   _page: 1,
+  //   _limit: 10,
+  //   _totalRows: 1,
+  // });
+  // const [filters, setFilters] = useState({
+  //   _limit: 10,
+  //   _page: 1,
+  //   title_like: "",
+  // });
+  const [showClock, setShowClock] = useState(true);
 
-  useEffect(() => {
-    async function fetchPostList() {
-      try {
-        const paramsString = queryString.stringify(filters);
-        const requestUrl = `http://js-post-api.herokuapp.com/api/posts?${paramsString}`;
-        const response = await fetch(requestUrl);
-        const responseJSON = await response.json();
-        console.log({ responseJSON });
-        const { data, pagination } = responseJSON;
-        setPostList(data);
-        setPagination(pagination);
-      } catch (error) {
-        console.log("Failed to fetch post list : ", error.message);
-      }
-    }
-    console.log("Post list Effect");
-    fetchPostList();
-  }, [filters]);
+  // useEffect(() => {
+  //   async function fetchPostList() {
+  //     try {
+  //       const paramsString = queryString.stringify(filters);
+  //       const requestUrl = `http://js-post-api.herokuapp.com/api/posts?${paramsString}`;
+  //       const response = await fetch(requestUrl);
+  //       const responseJSON = await response.json();
+  //       // console.log({ responseJSON });
+  //       const { data, pagination } = responseJSON;
+  //       setPostList(data);
+  //       setPagination(pagination);
+  //     } catch (error) {
+  //       console.log("Failed to fetch post list : ", error.message);
+  //     }
+  //   }
+  //   console.log("Post list Effect");
+  //   fetchPostList();
+  // }, [filters]);
   // useEffect(() => {
   //   console.log("Todo Effect!");
   // });
 
-  function handlePageChange(newPage) {
-    console.log("newPage :", newPage);
-    setFilters({
-      ...filters,
-      _page: newPage,
-    });
-  }
+  // function handlePageChange(newPage) {
+  //   console.log("newPage :", newPage);
+  //   setFilters({
+  //     ...filters,
+  //     _page: newPage,
+  //   });
+  // }
 
   // function handleTodoClick(todo) {
   //   console.log(todo);
@@ -77,22 +79,30 @@ function App() {
   //   setTodoList(newTodoList);
   // }
 
-  function handleFiltersChange(newFilters) {
-    console.log("New Filter", newFilters);
-    setFilters({
-      ...filters,
-      _page: 1,
-      title_like: newFilters.searchTerm,
-    });
-  }
+  // function handleFiltersChange(newFilters) {
+  //   console.log("New Filter", newFilters);
+  //   setFilters({
+  //     ...filters,
+  //     _page: 1,
+  //     title_like: newFilters.searchTerm,
+  //   });
+  // }
   return (
     <div className="app">
-      <h1> Welcome -TodoList</h1>
-      <PostFiltersForm onSubmit={handleFiltersChange} />
+      <h1> Welcome - Clock</h1>
+      {showClock && <Clock />}
+      <button
+        onClick={() => {
+          setShowClock(false);
+        }}
+      >
+        Hile Clock
+      </button>
+      {/* <PostFiltersForm onSubmit={handleFiltersChange} />
       {/* <TodoForm onSubmit={handleTodoFormSubmit} />
       <TodoList todos={todoList} onTodoClick={handleTodoClick} /> */}
-      <PostList posts={postList} />
-      <Pagination pagination={pagination} onPageChange={handlePageChange} />
+      {/* <PostList posts={postList} />
+      <Pagination pagination={pagination} onPageChange={handlePageChange} /> */}
     </div>
   );
 }
