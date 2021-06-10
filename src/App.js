@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
+// import { useEffect } from "react";
 // import { useEffect } from "react";
 import "./App.scss";
-import BetterClock from "./components/BetterClock";
+import MagicBox from "./components/MagicBox";
+// import BetterClock from "./components/BetterClock";
 // import queryString from "query-string";
-import Clock from "./components/Clock";
+// import Clock from "./components/Clock";
 // import Pagination from "./components/Pagination";
 // import PostList from "./components/PostList";
 // import PostFiltersForm from "./components/PostFiltersForm";
@@ -28,7 +30,7 @@ function App() {
   //   _page: 1,
   //   title_like: "",
   // });
-  const [showClock, setShowClock] = useState(true);
+  // const [showClock, setShowClock] = useState(true);
 
   // useEffect(() => {
   //   async function fetchPostList() {
@@ -91,8 +93,9 @@ function App() {
   // }
   return (
     <div className="app">
-      <h1> Welcome - Clock</h1>
-      {showClock && <Clock />}
+      <h1> Welcome - Color</h1>
+      <MagicBox />
+      {/* {showClock && <Clock />}
       <BetterClock />
       <button
         onClick={() => {
@@ -100,7 +103,7 @@ function App() {
         }}
       >
         Hile Clock
-      </button>
+      </button> */}
       {/* <PostFiltersForm onSubmit={handleFiltersChange} />
       {/* <TodoForm onSubmit={handleTodoFormSubmit} />
       <TodoList todos={todoList} onTodoClick={handleTodoClick} /> */}
